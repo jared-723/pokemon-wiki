@@ -1,10 +1,14 @@
+import { useDispatch } from "react-redux";
 import FooterPokeball from "../components/layout/FooterPokeball";
+import { loginTrainer } from "../store/slices/trainer.slice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const nameTrainer = e.target.nameTrainer.value;
-    console.log(nameTrainer);
+    dispatch(loginTrainer(nameTrainer));
   };
 
   return (
