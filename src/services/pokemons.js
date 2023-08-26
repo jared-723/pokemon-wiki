@@ -31,3 +31,22 @@ const formatStats = (stats) =>{
 const formatTypes = (types) =>{
     return types.map((type) => type.type.name)
 }
+
+export const joinPokemonTypes = (types = []) =>{
+    return types.slice(0,2).join(" / ")
+}
+
+const borderStylePokemonType = {
+    grass: "border-[5px] border-green-500",
+    fire: "border-[5px] border-orange-500"
+  }
+
+  const bgStylePokemonType = {
+    grass: "bg-gradient-to-b from-green-500 to-green-300",
+    fire: "bg-gradient-to-b from-orange-500 to-orange-300"
+  }
+
+  export{
+    borderStylePokemonType,
+    bgStylePokemonType
+  }
