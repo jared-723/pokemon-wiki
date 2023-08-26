@@ -12,7 +12,7 @@ const BarProgressStat = ({ stat }) => {
         <h5>{stat.name}</h5>
         <span>{stat.value}/255</span>
       </section>
-      <div style = {{widht: getPercentBarProgress(stat.value)}} className="h-6 bg-slate-300 rounded-md">
+      <div style = {{width: getPercentBarProgress(stat.value)}} className="h-6 bg-slate-300 rounded-md">
         <div className="h-full bg-gradient-to-r from-yellow-500 to-orange-500"></div>
       </div>
     </article>
