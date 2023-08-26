@@ -9,5 +9,25 @@ export const getAllPokemons = async () => {
 
 export const getPokemonByUrl = async (pokemonUrl) =>{
     const {data} = await axios.get(pokemonUrl);
-    return data
+
+    const dataPokemon = {
+        id: data.id,
+        name: data.name,
+        types: formatTypes(data.types),
+        stats: formatStats(data.stats),
+        image: data.sprites.versions["generation-v"]["black-white"].animated.front_default
+    }
+
+    return dataPokemon;
+}
+
+const formatStats = (stats) =>{
+    stats.map((stat) => ({
+        name: stat.stat.name,
+        value: stat.base_stat
+    }))
+}
+
+const formatTypes = (types) =>{
+    return types.map((type) => type.type.name)
 }
