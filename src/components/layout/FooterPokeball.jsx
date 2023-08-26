@@ -1,7 +1,7 @@
 const FooterPokeball = () => {
     return (
       <section>
-        <div className="h-16 bg-red-700"></div>
+        <div className="h-16 bg-[#DD1A1A]"></div>
         <div className="h-12 bg-black relative">
           <div
             className="h-14 aspect-square bg-white rounded-full absolute 
