@@ -22,7 +22,7 @@ export const getPokemonByUrl = async (pokemonUrl) =>{
 }
 
 const formatStats = (stats) =>{
-    stats.map((stat) => ({
+    return stats.map((stat) => ({
         name: stat.stat.name,
         value: stat.base_stat
     }))
