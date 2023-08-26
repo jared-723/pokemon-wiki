@@ -3,7 +3,7 @@ import { usePokedex } from "../hooks/usePokedex";
 
 const Pokedex = () => {
   
-  const {} = usePokedex()
+  const {name,pokemonName, setPokemonName, pokemonType, setPokemonType, handleChange, pokemonByName} = usePokedex()
 
   return (
     <main>

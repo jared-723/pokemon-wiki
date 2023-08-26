@@ -34,5 +34,9 @@ export const usePokedex = () =>{
         name,
         pokemonName,
         setPokemonName,
+        pokemonType,
+        setPokemonType,
+        handleChange,
+        pokemonByName
     }
 }
