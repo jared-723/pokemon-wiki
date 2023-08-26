@@ -27,7 +27,7 @@ const PokemonCard = ({ pokemonUrl }) => {
     to={`/pokedex/${pokemonInfo?.id}`}
       className={`text-center capitalize rounded-md  ${
         borderStylePokemonType[pokemonInfo?.types[0]]
-      }}`}
+      }`}
     >
       <header
         className={`h-[80px] relative mb-8 ${

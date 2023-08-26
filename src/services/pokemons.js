@@ -7,6 +7,13 @@ export const getAllPokemons = async () => {
     return data.results
 }
 
+export const getPokemonsByType = async (pokemonType) => {
+    const url = `https://pokeapi.co/api/v2/type/${pokemonType}`
+    const {data} = await axios.get(url);
+    const formatPokemons = data.pokemon.map(({pokemon}) => pokemon)
+    return formatPokemons
+}
+
 export const getPokemonByUrl = async (pokemonUrl) =>{
     const {data} = await axios.get(pokemonUrl);
 
@@ -19,6 +26,25 @@ export const getPokemonByUrl = async (pokemonUrl) =>{
     }
 
     return dataPokemon;
+}
+
+export const getPokemonById = async (pokemonId) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+
+    const {data} = await axios.get(url);
+
+    const dataPokemon = {
+        id: data.id,
+        name: data.name,
+        types: formatTypes(data.types),
+        stats: formatStats(data.stats),
+        image: data.sprites.versions["generation-v"]["black-white"].animated.front_default,
+        weight: data.weight,
+        height: data.height,
+        abilities: data.abilities,
+        moves: data.moves
+    }
+    return dataPokemon
 }
 
 const formatStats = (stats) =>{
