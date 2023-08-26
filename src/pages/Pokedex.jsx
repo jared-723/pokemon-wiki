@@ -30,6 +30,7 @@ const Pokedex = () => {
             <form className="flex flex-col sm:flex-row justify-between gap-4">
               <div>
                 <input
+                  value={pokemonName} onChange={handleChange(setPokemonName)}
                   className="shadow-md w-[50%] sm:w-[200px] md:w-[280px] lg:w-[340px] pl-[10px] py-[8px]"
                   placeholder="Search pokemon..."
                   type="text"
@@ -39,8 +40,11 @@ const Pokedex = () => {
                 </button>
               </div>
 
-              <select className="shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px]">
+              <select 
+              value= {pokemonType} onChange={handleChange(setPokemonType)}
+              className="shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px]">
                 <option value="">All pokemon</option>
+                <option value="rock">Rock</option>
               </select>
             </form>
           </div>
