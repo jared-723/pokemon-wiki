@@ -104,7 +104,29 @@ const borderStylePokemonType = {
     steel : "bg-gradient-to-b from-gray-500 to-gray-300"
   }
 
+  const textColorPokemonType = {
+    grass: "text-green-500",
+    fire: "text-orange-500",
+    water: "text-blue-500",
+    bug: "text-green-500",
+    normal: "text-slate-400",
+    poison: "text-purple-500",
+    electric: "text-yellow-500",
+    ground: "text-amber-950",
+    rock: "text-stone-600",
+    fairy: "text-pink-500",
+    dark: "text-zinc-900",
+    dragon: "text-indigo-700",
+    fighting: "text-yellow-900",
+    flying: "text-cyan-500",
+    ghost: "text-violet-900",
+    ice: "text-sky-300",
+    psychic: "text-fuchsia-500",
+    steel: "text-gray-500",
+}
+
   export{
     borderStylePokemonType,
-    bgStylePokemonType
+    bgStylePokemonType,
+    textColorPokemonType
   }
