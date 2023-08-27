@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPokemonById } from "../services/pokemons";
+import { bgStylePokemonType, getPokemonById } from "../services/pokemons";
 import StatBarList from "../components/pokemonDetail/StatBarList";
-import FooterPokeball from "../components/layout/FooterPokeball";
 
 const PokemonDetail = () => {
   const [pokemonData, setpokemonData] = useState(null);
@@ -32,12 +31,17 @@ const PokemonDetail = () => {
         <div className="h-[40%] bg-[#0C0C0C]"></div>
       </div>
 
-      <article className="w-[min(100%,_400px)] mt-8 grid place-items-center px-4 ">
-          <header className="h-[100px] w-full relative bg-red-500 grid place-items-center">
+      <article className="w-[min(100%,_400px)] mt-8 justify-self-center grid place-items-center px-4">
+        <section className="w-full grid place-items-center shadow-xl border-[1px] border-slate-200">
+          <header
+            className={`h-[100px] w-full relative  grid place-items-center`}
+          >
             <div className="h-[90px] w-[90px] absolute -top-4 z-10">
-              <img 
-              className="h-full w-full object-contain"
-              src={pokemonData?.image} alt="" />
+              <img
+                className="h-full w-full object-contain"
+                src={pokemonData?.image}
+                alt=""
+              />
             </div>
             <div className="w-[80px] h-[20px] bg-black/30 z-0 rounded-[100%] absolute bottom-[20px]"></div>
           </header>
@@ -45,7 +49,8 @@ const PokemonDetail = () => {
             <span>#{pokemonData?.id}</span>
             <StatBarList stats={pokemonData?.stats} />
           </section>
-        </article>
+        </section>
+      </article>
     </main>
   );
 };
