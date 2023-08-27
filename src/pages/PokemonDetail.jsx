@@ -6,7 +6,12 @@ import StatBarList from "../components/pokemonDetail/StatBarList";
 const PokemonDetail = () => {
   const [pokemonData, setpokemonData] = useState(null);
 
+  console.log(pokemonData);
+
+
   const { pokemonId } = useParams();
+
+  
 
   useEffect(() => {
     getPokemonById(pokemonId)
@@ -31,22 +36,28 @@ const PokemonDetail = () => {
         <div className="h-[40%] bg-[#0C0C0C]"></div>
       </div>
 
-      <article className="w-[min(100%,_400px)] mt-8 justify-self-center grid place-items-center px-4">
-        <section className="w-full grid place-items-center shadow-xl border-[1px] border-slate-200">
-          <header
-            className={`h-[100px] w-full relative  grid place-items-center`}
-          >
-            <div className="h-[90px] w-[90px] absolute -top-4 z-10">
+      <article className="w-[min(100%,_400px)] mt-8 justify-self-center grid place-items-center px-4 ">
+        <section className="w-full shadow-2xl p-[2px] pb-4 grid gap-6 border-[1px] border-slate-200 rounded-md">
+          <header className={`h-[100px] w-full relative ${bgStylePokemonType[pokemonData?.types[0]]} grid place-items-center`}>
+            <div className="h-[90px] w-[90px] absolute -top-4 ">
               <img
                 className="h-full w-full object-contain"
                 src={pokemonData?.image}
                 alt=""
               />
             </div>
-            <div className="w-[80px] h-[20px] bg-black/30 z-0 rounded-[100%] absolute bottom-[20px]"></div>
           </header>
-          <section>
-            <span>#{pokemonData?.id}</span>
+          <section className="w-full px-4 text-center flex flex-col gap-4">
+            <div>
+              <span className=" p-2 px-4 border-[2px] border-slate-200 font-bold text-lg lg:text-2xl">
+                #{pokemonData?.id}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <hr className="w-full"/>
+              <h2 className="font-semibold capitalize">{pokemonData?.name}</h2>
+              <hr className="w-full"/>
+            </div>
             <StatBarList stats={pokemonData?.stats} />
           </section>
         </section>
