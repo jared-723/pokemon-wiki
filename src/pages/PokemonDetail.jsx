@@ -25,7 +25,7 @@ const PokemonDetail = () => {
       <div className="h-[90px]">
         <div className="h-[70%] bg-[#DD1A1A] relative">
           <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
-            <img src="public/images/banner.png" alt="" />
+            <img src="/images/banner.png" alt="" />
           </div>
           <div
             className="h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square after:bg-[#212121] 
