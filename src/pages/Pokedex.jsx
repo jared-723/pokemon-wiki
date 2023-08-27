@@ -2,11 +2,18 @@ import { PokemonList } from "../components/pokedex/PokemonList";
 import { usePokedex } from "../hooks/usePokedex";
 
 const Pokedex = () => {
-  
-  const {name,pokemonName, setPokemonName, pokemonType, setPokemonType, handleChange, pokemonByName} = usePokedex()
+  const {
+    name,
+    pokemonName,
+    setPokemonName,
+    pokemonType,
+    setPokemonType,
+    handleChange,
+    pokemonByName,
+  } = usePokedex();
 
   return (
-    <main>
+    <main className="grid gap-8">
       <section>
         <div className="h-[90px]">
           <div className="h-[70%] bg-[#DD1A1A] relative">
@@ -27,11 +34,12 @@ const Pokedex = () => {
               <span className="font-bold text-[#ff0000]">Welcome {name},</span>{" "}
               Here you can find your favorite pokemon
             </p>
-            <form className="flex flex-col sm:flex-row justify-between gap-4">
+            <form className="flex flex-col sm:flex-row sm:justify-between gap-4">
               <div>
                 <input
-                  value={pokemonName} onChange={handleChange(setPokemonName)}
-                  className="shadow-md w-[50%] sm:w-[200px] md:w-[280px] lg:w-[340px] pl-[10px] py-[8px]"
+                  value={pokemonName}
+                  onChange={handleChange(setPokemonName)}
+                  className="shadow-md w-[50%] sm:w-[200px] md:w-[280px] lg:w-[340px] pl-[10px] py-[8px] text-sm sm:text-lg"
                   placeholder="Search pokemon..."
                   type="text"
                 />
@@ -39,10 +47,11 @@ const Pokedex = () => {
                   Search
                 </button>
               </div>
-
-              <select 
-              value= {pokemonType} onChange={handleChange(setPokemonType)}
-              className="shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px]">
+              <select
+                value={pokemonType}
+                onChange={handleChange(setPokemonType)}
+                className="shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px]"
+              >
                 <option value="">All pokemon</option>
                 <option value="grass">Grass</option>
                 <option value="fire">Fire</option>
@@ -53,7 +62,7 @@ const Pokedex = () => {
                 <option value="electric">Electric</option>
                 <option value="ground">Ground</option>
                 <option value="fairy">Fairy</option>
-                
+
                 <option value="dark">Dark</option>
                 <option value="dragon">Dragon</option>
                 <option value="fighting">Fighting</option>
