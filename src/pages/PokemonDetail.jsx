@@ -20,14 +20,14 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
     <main className="min-h-screen grid grid-rows-[auto_1fr] gap-4 pb-[40px]">
       {/* Copied from Pokedex.jsx */}
       <div className="h-[90px]">
-        <div className="h-[70%] bg-[#DD1A1A] relative">
+        <div className={`h-[70%] relative ${darkmode ? 'bg-[#ffc125]' : 'bg-[#DD1A1A]'} `}>
           <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
             <img src="/images/banner.png" alt="" />
           </div>
           <div
-            className="h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square after:bg-[#212121] 
+            className={`h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
-                after:border-[6px] after:border-black"
+                after:border-[6px] after:border-black ${darkmode ? 'after:bg-[#3e3213]' : 'after:bg-[#212121] '} `}
           ></div>
           <div
             onClick={handleDarkmode}
