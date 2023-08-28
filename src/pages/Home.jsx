@@ -21,7 +21,7 @@ const Home = ({ setDarkmode, darkmode, handleDarkmode }) => {
           <div className="w-[80%]">
             <img src="/images/banner.png" alt="" />
           </div>
-          <h2 className=" lg:text-4xl font-bold  text-[#FE1936] text-2xl">
+          <h2 className={` lg:text-4xl font-bold  text-2xl ${darkmode ? 'text-[#ffc125]' : 'text-[#FE1936]'} `}>
             Hi, Trainer!
           </h2>
           <p className={`${darkmode ? "text-white" : "text-black"}`}>
@@ -40,7 +40,7 @@ const Home = ({ setDarkmode, darkmode, handleDarkmode }) => {
               placeholder="Your Name..."
               required
             />
-            <button className="bg-[#D93F3F] py-[8px] w-[100px] text-white">
+            <button className={`py-[8px] w-[100px] font-bold text-white ${darkmode ? 'bg-[#ffc125]' : 'bg-[#D93F3F]'} `}>
               Start
             </button>
           </form>
@@ -54,7 +54,7 @@ const Home = ({ setDarkmode, darkmode, handleDarkmode }) => {
           ></div>
         </article>
       </section>
-      <FooterPokeball />
+      <FooterPokeball darkmode={darkmode} />
     </main>
   );
 };

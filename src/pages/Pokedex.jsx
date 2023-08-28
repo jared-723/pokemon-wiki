@@ -16,14 +16,14 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
     <main className="grid gap-8">
       <section>
         <div className="h-[90px]">
-          <div className="h-[70%] bg-[#DD1A1A] relative">
+          <div className={`h-[70%] relative ${darkmode ? 'bg-[#ffc125]' : 'bg-[#DD1A1A]'} `}>
             <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
               <img src="/images/banner.png" alt="" />
             </div>
             <div
-              className="h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square after:bg-[#212121] 
+              className={`h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
-                after:border-[6px] after:border-black"
+                after:border-[6px] after:border-black ${darkmode ? 'after:bg-[#3e3213]' : 'after:bg-[#212121] '} `}
             ></div>
             <div
               onClick={handleDarkmode}
@@ -41,7 +41,7 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
             <p
               className={`py-[40px] ${darkmode ? "text-white" : "text-black"} `}
             >
-              <span className="font-bold text-[#ff0000]">Welcome {name},</span>{" "}
+              <span className={`font-bold text-[#ff0000] ${darkmode ? 'text-[#ffc125]' : 'text-[#ff0000]'} `}>Welcome {name},</span>{" "}
               Here you can find your favorite pokemon
             </p>
             <form className="flex flex-col sm:flex-row sm:justify-between gap-4">
@@ -57,7 +57,7 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
                   placeholder="Search pokemon..."
                   type="text"
                 />
-                <button className="bg-[#D93F3F] text-white w-[120px] py-[8px]">
+                <button className={`w-[120px] text-white py-[8px] font-bold ${ darkmode ? 'bg-[#ffc125]' : 'bg-[#D93F3F]'} `}>
                   Search
                 </button>
               </div>
