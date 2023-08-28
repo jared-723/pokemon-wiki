@@ -52,7 +52,7 @@ function App() {
           />
         </Route>
 
-        <Route path="*" elemento={<Page404 />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </main>
   );

@@ -83,6 +83,14 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               </h2>
               <hr className="w-full" />
             </div>
+            <div className="flex justify-center gap-4">
+              <div className="flex flex-col items-center">
+                <p className="text-sm font-thin">Height</p> <span>{pokemonData?.height}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <p className="text-sm font-thin">weight</p> <span>{pokemonData?.weight}</span>
+              </div>
+            </div>
             <StatBarList stats={pokemonData?.stats} darkmode={darkmode} />
           </section>
         </section>
