@@ -31,7 +31,7 @@ const Home = ({ setDarkmode, darkmode, handleDarkmode }) => {
             <input
               className={`shadow-md py-[8px] px-2 ${
                 darkmode
-                  ? " bg-[#383838] text-white"
+                  ? " bg-[#272c34] text-white"
                   : " text-black"
               }`}
               autoComplete="off"
