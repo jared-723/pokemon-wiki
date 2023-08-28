@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { bgStylePokemonType, getPokemonById } from "../services/pokemons";
+import { bgStylePokemonType, formatTypes, getPokemonById } from "../services/pokemons";
 import StatBarList from "../components/pokemonDetail/StatBarList";
+
 
 const PokemonDetail = ({ handleDarkmode, darkmode }) => {
   const [pokemonData, setpokemonData] = useState(null);
@@ -83,13 +84,27 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               </h2>
               <hr className="w-full" />
             </div>
+
             <div className="flex justify-center gap-4">
               <div className="flex flex-col items-center">
-                <p className="text-sm font-thin">Height</p> <span>{pokemonData?.height}</span>
+                <p className="text-sm font-thin">Height</p>{" "}
+                <span>{pokemonData?.height}</span>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-sm font-thin">weight</p> <span>{pokemonData?.weight}</span>
+                <p className="text-sm font-thin">weight</p>{" "}
+                <span>{pokemonData?.weight}</span>
               </div>
+              <section>
+                <div>
+                  <h3>Type</h3>
+                  <div>{pokemonData?.types}</div>
+
+                </div>
+                <div>
+                  <h3>Abilities</h3>
+
+                </div>
+              </section>
             </div>
             <StatBarList stats={pokemonData?.stats} darkmode={darkmode} />
           </section>

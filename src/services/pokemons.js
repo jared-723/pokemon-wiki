@@ -129,4 +129,4 @@ const textColorPokemonType = {
     steel: "text-gray-500",
 }
 
-export { borderStylePokemonType, bgStylePokemonType, textColorPokemonType };
+export { borderStylePokemonType, bgStylePokemonType, textColorPokemonType, formatTypes };
