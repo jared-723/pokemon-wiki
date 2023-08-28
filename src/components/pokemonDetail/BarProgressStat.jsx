@@ -1,4 +1,4 @@
-const BarProgressStat = ({ stat }) => {
+const BarProgressStat = ({ stat, darkmode }) => {
 
     const getPercentBarProgress = (statValue) => {
         const MAX_STAT_VALUE = 255;
@@ -8,7 +8,7 @@ const BarProgressStat = ({ stat }) => {
 
   return (
     <article>
-      <section className="flex justify-between px-2">
+      <section className={`flex justify-between px-2 ${darkmode ? 'text-white' : 'text-black'}`}>
         <h5 className="font-semibold">{stat.name}</h5>
         <span className="font-semibold">{stat.value}/255</span>
       </section>
