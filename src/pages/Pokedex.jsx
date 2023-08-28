@@ -1,7 +1,7 @@
 import { PokemonList } from "../components/pokedex/PokemonList";
 import { usePokedex } from "../hooks/usePokedex";
 
-const Pokedex = () => {
+const Pokedex = ({ handleDarkmode, darkmode }) => {
   const {
     name,
     pokemonName,
@@ -25,21 +25,35 @@ const Pokedex = () => {
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
                 after:border-[6px] after:border-black"
             ></div>
+            <div
+              onClick={handleDarkmode}
+              className={`h-[30px] w-[55px] border-2 rounded-full p-[3px] flex items-center cursor-pointer transition-all absolute top-[66px] right-[30%] after:block after:content-[''] after:h-[20px] after:w-[20px] after:rounded-full ${
+                darkmode
+                  ? "after:bg-white border-white justify-end"
+                  : "after:bg-[#DD1A1A] border-[#DD1A1A] justify-start"
+              }`}
+            ></div>
           </div>
           <div className="h-[40%] bg-[#0C0C0C]"></div>
         </div>
         <div className="flex justify-center items-center">
           <div className="w-[80%]">
-            <p className="py-[40px]">
+            <p
+              className={`py-[40px] ${darkmode ? "text-white" : "text-black"} `}
+            >
               <span className="font-bold text-[#ff0000]">Welcome {name},</span>{" "}
               Here you can find your favorite pokemon
             </p>
             <form className="flex flex-col sm:flex-row sm:justify-between gap-4">
-              <div>
+              <div className="flex items-center">
                 <input
                   value={pokemonName}
                   onChange={handleChange(setPokemonName)}
-                  className="shadow-md w-[50%] sm:w-[200px] md:w-[280px] lg:w-[340px] pl-[10px] py-[8px] text-sm sm:text-lg"
+                  className={`shadow-md w-[50%] sm:w-[200px] md:w-[280px] lg:w-[340px] pl-[10px] py-[10px] text-sm  ${
+                    darkmode
+                      ? "text-white bg-[#383838]"
+                      : "placeholder:text-[#747474] text-black"
+                  } `}
                   placeholder="Search pokemon..."
                   type="text"
                 />
@@ -50,7 +64,7 @@ const Pokedex = () => {
               <select
                 value={pokemonType}
                 onChange={handleChange(setPokemonType)}
-                className="shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px]"
+                className={`shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px] ${darkmode ? 'text-white bg-[#383838]' : 'text-black'} `}
               >
                 <option value="">All pokemon</option>
                 <option value="grass">Grass</option>
@@ -76,7 +90,7 @@ const Pokedex = () => {
           </div>
         </div>
       </section>
-      <PokemonList pokemons={pokemonByName} />
+      <PokemonList pokemons={pokemonByName} darkmode={darkmode} />
     </main>
   );
 };

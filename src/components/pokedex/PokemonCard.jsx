@@ -3,7 +3,7 @@ import { bgStylePokemonType, borderStylePokemonType, getPokemonByUrl, joinPokemo
 import StatsList from "./StatsList";
 import { Link } from "react-router-dom";
 
-const PokemonCard = ({ pokemonUrl }) => {
+const PokemonCard = ({ pokemonUrl, darkmode }) => {
   const [pokemonInfo, setPokemonInfo] = useState(null);
 
   useEffect(() => {
@@ -35,10 +35,10 @@ const PokemonCard = ({ pokemonUrl }) => {
       </header>
       <section>
         <h3 className={`text-lg font-bold ${textColorPokemonType[pokemonInfo?.types[0]]}`}>{pokemonInfo?.name}</h3>
-        <h4>{joinPokemonTypes(pokemonInfo?.types)}</h4>
-        <h5 className="text-[10px] mb-2 text-black/50 font-semibold">Type</h5>
+        <h4 className={`${darkmode ? 'text-white' : 'text-black'}`}>{joinPokemonTypes(pokemonInfo?.types)}</h4>
+        <h5 className={`text-[10px] mb-2 font-semibold ${darkmode ? 'text-white/50' : 'text-black/50'} `}>Type</h5>
         <hr />
-        <StatsList stats={pokemonInfo?.stats} type = {pokemonInfo?.types[0]}/>
+        <StatsList stats={pokemonInfo?.stats} type = {pokemonInfo?.types[0]} darkmode={darkmode} />
       </section>
     </Link>
   );

@@ -5,21 +5,56 @@ import Pokedex from "./pages/Pokedex";
 import PokemonDetail from "./pages/PokemonDetail";
 import Page404 from "./pages/Page404";
 import PrivateRoutes from "./components/auth/PrivateRoutes";
+import { useState } from "react";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
+  const [darkmode, setDarkmode] = useState(false);
 
-        <Route element={<PrivateRoutes/>}>
-          <Route path="/pokedex" element={<Pokedex />} />
-          <Route path="/pokedex/:pokemonId" element={<PokemonDetail />} />
+  const handleDarkmode = () => {
+    setDarkmode(!darkmode);
+  };
+
+  return (
+    <main
+      className={`transition-all ${
+        darkmode ? "bg-[#171d23]" : "bg-[#e4e4e424]"
+      }`}
+    >
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              darkmode={darkmode}
+              handleDarkmode={handleDarkmode}
+            />
+          }
+        />
+
+        <Route element={<PrivateRoutes />}>
+          <Route
+            path="/pokedex"
+            element={
+              <Pokedex
+                darkmode={darkmode}
+                handleDarkmode={handleDarkmode}
+              />
+            }
+          />
+          <Route
+            path="/pokedex/:pokemonId"
+            element={
+              <PokemonDetail
+                darkmode={darkmode}
+                handleDarkmode={handleDarkmode}
+              />
+            }
+          />
         </Route>
 
         <Route path="*" elemento={<Page404 />} />
       </Routes>
-    </>
+    </main>
   );
 }
 
