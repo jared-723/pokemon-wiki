@@ -51,7 +51,7 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
                   onChange={handleChange(setPokemonName)}
                   className={`shadow-md w-[50%] sm:w-[200px] md:w-[280px] lg:w-[340px] pl-[10px] py-[10px] text-sm  ${
                     darkmode
-                      ? "text-white bg-[#383838]"
+                      ? "text-white bg-[#272c34]"
                       : "placeholder:text-[#747474] text-black"
                   } `}
                   placeholder="Search pokemon..."
@@ -64,7 +64,7 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
               <select
                 value={pokemonType}
                 onChange={handleChange(setPokemonType)}
-                className={`shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px] ${darkmode ? 'text-white bg-[#383838]' : 'text-black'} `}
+                className={`shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px] ${darkmode ? 'text-white bg-[#272c34]' : 'text-black'} `}
               >
                 <option value="">All pokemon</option>
                 <option value="grass">Grass</option>
