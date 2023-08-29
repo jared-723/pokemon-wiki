@@ -3,7 +3,7 @@ import { bgStylePokemonType, borderStylePokemonType, getPokemonByUrl, joinPokemo
 import StatsList from "./StatsList";
 import { Link } from "react-router-dom";
 
-const PokemonCard = ({ pokemonUrl, darkmode }) => {
+const PokemonCard = ({ pokemonUrl, darkmode}) => {
   const [pokemonInfo, setPokemonInfo] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const PokemonCard = ({ pokemonUrl, darkmode }) => {
           bgStylePokemonType[pokemonInfo?.types[0]]
         }`}
       >
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 h-[65px] aspect-square">
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 h-[90px] aspect-square">
           <img
             className="h-full w-full object-contain "
             src={pokemonInfo?.image}

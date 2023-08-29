@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllPokemons = async () => {
   //Por ahora lo ejamos asi, solo trae 2o pokemons
-  const URL = "https://pokeapi.co/api/v2/pokemon?limit=20";
+  const URL = "https://pokeapi.co/api/v2/pokemon?limit=1281";
   const { data } = await axios.get(URL);
   return data.results;
 };
@@ -16,18 +16,26 @@ export const getPokemonsByType = async (pokemonType) => {
 
 export const getPokemonByUrl = async (pokemonUrl) => {
   const { data } = await axios.get(pokemonUrl);
-
   const dataPokemon = {
     id: data.id,
     name: data.name,
     types: formatTypes(data.types),
     stats: formatStats(data.stats),
-    image:
+    image: data.sprites.other["official-artwork"].front_default,
+    image_gif:
       data.sprites.versions["generation-v"]["black-white"].animated
         .front_default,
+    image_gif_back:
+      data.sprites.versions["generation-v"]["black-white"].animated
+        .back_default,
   };
 
   return dataPokemon;
+};
+
+export const getAllTypes = async () => {
+  const { data } = await axios.get("https://pokeapi.co/api/v2/type");
+  return data.results;
 };
 
 export const getPokemonById = async (pokemonId) => {
@@ -40,9 +48,14 @@ export const getPokemonById = async (pokemonId) => {
     name: data.name,
     types: formatTypes(data.types),
     stats: formatStats(data.stats),
-    image:
+    image: data.sprites.other["official-artwork"].front_default,
+    image_gif_front:
       data.sprites.versions["generation-v"]["black-white"].animated
         .front_default,
+    image_gif_back:
+      data.sprites.versions["generation-v"]["black-white"].animated
+        .back_default,
+
     weight: data.weight,
     height: data.height,
     abilities: data.abilities,
@@ -109,24 +122,51 @@ const bgStylePokemonType = {
 };
 
 const textColorPokemonType = {
-    grass: "text-green-500",
-    fire: "text-orange-500",
-    water: "text-blue-500",
-    bug: "text-green-500",
-    normal: "text-slate-400",
-    poison: "text-purple-500",
-    electric: "text-yellow-500",
-    ground: "text-amber-950",
-    rock: "text-stone-600",
-    fairy: "text-pink-500",
-    dark: "text-zinc-900",
-    dragon: "text-indigo-700",
-    fighting: "text-yellow-900",
-    flying: "text-cyan-500",
-    ghost: "text-violet-900",
-    ice: "text-sky-300",
-    psychic: "text-fuchsia-500",
-    steel: "text-gray-500",
-}
+  grass: "text-green-500",
+  fire: "text-orange-500",
+  water: "text-blue-500",
+  bug: "text-green-500",
+  normal: "text-slate-400",
+  poison: "text-purple-500",
+  electric: "text-yellow-500",
+  ground: "text-amber-950",
+  rock: "text-stone-600",
+  fairy: "text-pink-500",
+  dark: "text-zinc-900",
+  dragon: "text-indigo-700",
+  fighting: "text-yellow-900",
+  flying: "text-cyan-500",
+  ghost: "text-violet-900",
+  ice: "text-sky-300",
+  psychic: "text-fuchsia-500",
+  steel: "text-gray-500",
+};
 
-export { borderStylePokemonType, bgStylePokemonType, textColorPokemonType };
+const bgColorTypeDetails = {
+  grass: "bg-green-500",
+  fire: "bg-orange-500",
+  water: "bg-blue-500",
+  bug: "bg-green-500",
+  normal: "bg-slate-400",
+  poison: "bg-purple-500",
+  electric: "bg-yellow-500",
+  ground: "bg-amber-950",
+  rock: "bg-stone-600",
+  fairy: "bg-pink-500",
+  dark: "bg-zinc-900",
+  dragon: "bg-indigo-700",
+  fighting: "bg-yellow-900",
+  flying: "bg-cyan-500",
+  ghost: "bg-violet-900",
+  ice: "bg-sky-300",
+  psychic: "bg-fuchsia-500",
+  steel: "bg-gray-500",
+};
+
+export {
+  borderStylePokemonType,
+  bgStylePokemonType,
+  textColorPokemonType,
+  formatTypes,
+  bgColorTypeDetails
+};
