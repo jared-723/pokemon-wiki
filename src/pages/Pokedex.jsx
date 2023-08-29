@@ -50,7 +50,7 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
                   darkmode
                     ? "after:bg-[#3e3213] hover:bg-[#ffc125]"
                     : "after:bg-[#212121] hover:bg-red-500"
-                } transition-colors hover:bg-red-500 cursor-pointer`}
+                } transition-colors cursor-pointer`}
             ></div>
             <div
               onClick={handleDarkmode}
