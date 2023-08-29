@@ -71,7 +71,7 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               bgStylePokemonType[pokemonData?.types[0]]
             } flex justify-center items-center`}
           >
-            <div className="absolute left-4 bottom-2 h-[50px]">
+            <div className="absolute left-4 lg:left-8 bottom-2 h-[50px]">
               <img
                 className="h-full w-full object-contain"
                 src={pokemonData?.image_gif_front}
@@ -87,7 +87,7 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               />
             </div>
 
-            <div className="absolute right-4 bottom-2 h-[50px]">
+            <div className="absolute right-4 lg:right-8 bottom-2 h-[50px]">
               <img
                 className="h-full w-full object-contain"
                 src={pokemonData?.image_gif_back}
