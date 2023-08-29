@@ -7,13 +7,12 @@ import { useDispatch } from "react-redux";
 import { logout } from "../store/slices/trainer.slice";
 
 const Pokedex = ({ handleDarkmode, darkmode }) => {
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const dispatch = useDispatch()
-  const [currentPage, setcurrentPage] = useState(1);
-
-  const handleLogOut = () =>{
-    dispatch(logout())
-  }
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
 
   const {
     name,
@@ -26,7 +25,10 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
     types,
   } = usePokedex();
 
-  const { itemsInCurrentPage, lastPage, pagesInCurrentBlock } = paginateData(pokemonByName,currentPage);
+  const { itemsInCurrentPage, lastPage, pagesInCurrentBlock } = paginateData(
+    pokemonByName,
+    currentPage
+  );
 
   return (
     <main className="grid gap-8">
@@ -40,12 +42,15 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
             <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
               <img src="/images/banner.png" alt="" />
             </div>
-            <div onClick={handleLogOut}
+            <div
+              onClick={handleLogOut}
               className={`h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
                 after:border-[6px] after:border-black ${
-                  darkmode ? "after:bg-[#3e3213]" : "after:bg-[#212121] "
-                } transition-colors hover:bg-red-500 cursor-pointer`}
+                  darkmode
+                    ? "after:bg-[#3e3213] hover:bg-[#ffc125]"
+                    : "after:bg-[#212121] hover:bg-red-500"
+                } transition-colors cursor-pointer`}
             ></div>
             <div
               onClick={handleDarkmode}
@@ -117,9 +122,15 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
         </div>
       </section>
 
-      <Pagination lastPage = {lastPage} pagesInCurrentBlock= {pagesInCurrentBlock} setcurrentPage={setcurrentPage} currentPage={currentPage}/>
+      <PokemonList pokemons={itemsInCurrentPage} darkmode={darkmode} />
 
-      <PokemonList pokemons={itemsInCurrentPage} darkmode={darkmode}/>
+      <Pagination
+        lastPage={lastPage}
+        pagesInCurrentBlock={pagesInCurrentBlock}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        darkmode={darkmode}
+      />
     </main>
   );
 };

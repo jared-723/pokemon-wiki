@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { bgStylePokemonType, getPokemonById } from "../services/pokemons";
+import {
+  bgStylePokemonType,
+  getPokemonById,
+  textColorPokemonType,
+  bgColorTypeDetails,
+} from "../services/pokemons";
 import StatBarList from "../components/pokemonDetail/StatBarList";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/slices/trainer.slice";
@@ -25,15 +30,23 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
     <main className="min-h-screen grid grid-rows-[auto_1fr] gap-6 pb-[40px]">
       {/* Copied from Pokedex.jsx */}
       <div className="h-[90px]">
-        <div className="h-[70%] bg-[#DD1A1A] relative">
+        <div
+          className={`h-[70%] relative ${
+            darkmode ? "bg-[#ffc125]" : "bg-[#DD1A1A]"
+          } `}
+        >
           <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
             <img src="/images/banner.png" alt="" />
           </div>
           <div
             onClick={handleLogOut}
-            className="h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square after:bg-[#212121] 
+            className={`h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
-                after:border-[6px] after:border-black transition-colors hover:bg-red-500 cursor-pointer"
+                after:border-[6px] after:border-black ${
+                  darkmode
+                    ? "after:bg-[#3e3213] hover:bg-[#ffc125]"
+                    : "after:bg-[#212121] hover:bg-red-500"
+                } transition-colors cursor-pointer`}
           ></div>
           <div
             onClick={handleDarkmode}
@@ -47,7 +60,7 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
         <div className="h-[40%] bg-[#0C0C0C]"></div>
       </div>
 
-      <article className="w-[min(100%,_400px)] mt-8 justify-self-center grid place-items-center px-4 ">
+      <article className="w-[min(100%,_600px)] mt-8 justify-self-center grid place-items-center px-4 ">
         <section
           className={`w-full shadow-2xl p-[2px] pb-4 grid gap-6 border-[1px] rounded-md ${
             darkmode ? "border-[#252525]" : "border-slate-200"
@@ -86,11 +99,9 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
           <section className="w-full px-4 text-center flex flex-col gap-4">
             <div>
               <span
-                className={`p-2 px-4 border-[2px] font-bold text-lg lg:text-2xl ${
-                  darkmode
-                    ? "text-white border-[#252525]"
-                    : "text-black border-slate-200"
-                }`}
+                className={`p-2 px-4 border-[1px] font-bold text-lg lg:text-2xl ${
+                  darkmode ? " border-[#252525]" : " border-slate-200"
+                } ${textColorPokemonType[pokemonData?.types[0]]}`}
               >
                 #{pokemonData?.id}
               </span>
@@ -98,8 +109,8 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
             <div className="flex items-center gap-2">
               <hr className="w-full" />
               <h2
-                className={`font-semibold capitalize ${
-                  darkmode ? "text-white" : "text-black"
+                className={`font-semibold capitalize text-3xl  ${
+                  textColorPokemonType[pokemonData?.types[0]]
                 }`}
               >
                 {pokemonData?.name}
@@ -107,40 +118,105 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               <hr className="w-full" />
             </div>
 
-            <div className="flex flex-col items-center gap-4">
-              <section className="flex gap-6">
-              <div className="flex flex-col items-center">
-                <p className="text-sm font-thin">Height</p>{" "}
-                <span>{pokemonData?.height}</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-sm font-thin">weight</p>{" "}
-                <span>{pokemonData?.weight}</span>
-              </div>
-              </section>
-
-              <section className="flex gap-8">
-                <div className="grid place-content-center gap-4">
-                  <h3>Type</h3>
-                  <ul className="flex flex-wrap gap-2">
-                    {pokemonData?.types.map((type) => (
-                      <li key={type} className={`p-[5px] rounded-md capitalize ${bgStylePokemonType[type]}`}>{type}</li>
-                    ))}
-                  </ul>
+            <div
+              className={`flex flex-col justify-center gap-4 ${
+                darkmode ? "text-white" : "text-black"
+              }`}
+            >
+              <div className="flex justify-center items-center gap-4">
+                <div className="flex flex-col items-center">
+                  <p className="text-[10px] font-semibold">Height</p>{" "}
+                  <span className="text-[15px] font-semibold">
+                    {pokemonData?.height}
+                  </span>
                 </div>
-                <div>
-                  <h3>Abilities</h3>
-                  <ul>
-                    {
-                      pokemonData?.abilities.map((ability) => <li className="capitalize" key={ability.ability.url}>{ability.ability.name}</li>)
-                    }
-                  </ul>
+                <div className="flex flex-col items-center">
+                  <p className="text-[10px] font-semibold">weight</p>{" "}
+                  <span className="text-[15px] font-semibold">
+                    {pokemonData?.weight}
+                  </span>
+                </div>
+              </div>
+              <section className="flex flex-col sm:flex-row justify-center items-center gap-5">
+                <div className="w-[50%] flex flex-col justify-center items-center gap-4 font-semibold">
+                  <h3 className={` ${darkmode ? "text-white" : "text-black"}`}>
+                    Type
+                  </h3>
+                  <div className="flex justify-center items-center gap-4">
+                    <p
+                      className={`text-white w-[100px] sm:w-[120px] py-1 ${
+                        bgColorTypeDetails[pokemonData?.types[0]]
+                      }`}
+                    >
+                      {pokemonData?.types[0]}
+                    </p>
+                    <p
+                      className={`text-white w-[100px] sm:w-[120px] py-1 ${
+                        bgColorTypeDetails[pokemonData?.types[1]]
+                      }`}
+                    >
+                      {pokemonData?.types[1]}
+                    </p>
+                  </div>
+                </div>
+                <div className="w-[50%] flex flex-col justify-center items-center gap-4 font-semibold">
+                  <h3 className={` ${darkmode ? "text-white" : "text-black"}`}>
+                    Abilities
+                  </h3>
+                  <div className="flex justify-center items-center gap-4">
+                    <p
+                      className={`w-[100px] sm:w-[120px] py-1 border-[1px]  ${
+                        darkmode ? "border-[#6c6c6c]" : "border-[#c9c9c9]"
+                      }`}
+                    >
+                      {pokemonData?.abilities[0].ability.name}
+                    </p>
+                    <p
+                      className={`w-[100px] sm:w-[120px] py-1 border-[1px]  ${
+                        darkmode ? "border-[#6c6c6c]" : "border-[#c9c9c9]"
+                      }`}
+                    >
+                      {pokemonData?.abilities[1]?.ability.name}
+                    </p>
+                  </div>
                 </div>
               </section>
             </div>
             <StatBarList stats={pokemonData?.stats} darkmode={darkmode} />
           </section>
           <section></section>
+        </section>
+      </article>
+      <article className="w-[min(100%,_600px)] p-[15px] mt-2 justify-self-center grid place-items-center">
+        <section
+          className={`w-full shadow-2xl p-[15px] pb-4 grid gap-6 border-[1px] rounded-md ${
+            darkmode ? "border-[#252525]" : "border-slate-200"
+          } `}
+        >
+          <div className="flex justify-center items-center gap-4">
+            <h3 className={`font-semibold text-3xl ${darkmode ? 'text-white' : 'text-black'}`}>Movements</h3>
+            <hr className="w-full" />
+            <div className="h-[60px] -rotate-12">
+              <div className={`h-[50%] w-[60px] border-l-[2px] border-t-[2px] border-r-[2px] rounded-t-full ${darkmode ? "border-[#252525]" : "border-slate-200"} `}></div>
+              <div className={`h-[50%] w-[60px] border-[2px] relative rounded-b-full  ${darkmode ? "border-[#252525]" : "border-slate-200"}`}>
+                <div className={`h-[20px] w-[20px] border-2 absolute top-[-40%] right-[32%] rounded-full after:block after:content-[''] after:h-[10px] after:w-[10px] after:border-2 after:absolute after:top-[20%] after:right-[19.335%] after:rounded-full ${darkmode ? "border-[#252525] after:border-[#252525] bg-[#171d23]" : "border-slate-200 after:border-slate-200 bg-white"}`}></div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-5">
+            {pokemonData?.moves.map((move) => (
+              <span
+                key={move.move.name}
+                className={`px-4 py-2 rounded-full ${
+                  darkmode
+                    ? "bg-[#10121a] text-white"
+                    : "bg-[#c9c9c9] text-black"
+                }`}
+              >
+                {move.move.name}
+              </span>
+            ))}
+          </div>
         </section>
       </article>
     </main>
