@@ -176,7 +176,7 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
                         darkmode ? "border-[#6c6c6c]" : "border-[#c9c9c9]"
                       }`}
                     >
-                      {pokemonData?.abilities[1].ability.name}
+                      {pokemonData?.abilities[1]?.ability.name}
                     </p>
                   </div>
                 </div>
