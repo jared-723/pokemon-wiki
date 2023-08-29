@@ -6,11 +6,11 @@ import { useDispatch } from "react-redux";
 import { logout } from "../store/slices/trainer.slice";
 
 const PokemonDetail = ({ handleDarkmode, darkmode }) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [pokemonData, setpokemonData] = useState(null);
-  const handleLogOut = () =>{
-    dispatch(logout())
-  }
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
   console.log(pokemonData);
 
   const { pokemonId } = useParams();
@@ -29,7 +29,8 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
           <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
             <img src="/images/banner.png" alt="" />
           </div>
-          <div onClick={handleLogOut}
+          <div
+            onClick={handleLogOut}
             className="h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square after:bg-[#212121] 
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
                 after:border-[6px] after:border-black transition-colors hover:bg-red-500 cursor-pointer"
@@ -58,7 +59,11 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
             } flex justify-center items-center`}
           >
             <div className="absolute left-4 bottom-2 h-[50px]">
-              <img className="h-full w-full object-contain" src={pokemonData?.image_gif_front} alt="" />
+              <img
+                className="h-full w-full object-contain"
+                src={pokemonData?.image_gif_front}
+                alt=""
+              />
             </div>
 
             <div className="h-[120px] w-[120px] absolute -top-4 ">
@@ -70,10 +75,14 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
             </div>
 
             <div className="absolute right-4 bottom-2 h-[50px]">
-              <img className="h-full w-full object-contain" src={pokemonData?.image_gif_back} alt="" />
+              <img
+                className="h-full w-full object-contain"
+                src={pokemonData?.image_gif_back}
+                alt=""
+              />
             </div>
           </header>
-          
+
           <section className="w-full px-4 text-center flex flex-col gap-4">
             <div>
               <span
@@ -98,7 +107,8 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               <hr className="w-full" />
             </div>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col items-center gap-4">
+              <section className="flex gap-6">
               <div className="flex flex-col items-center">
                 <p className="text-sm font-thin">Height</p>{" "}
                 <span>{pokemonData?.height}</span>
@@ -107,23 +117,30 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
                 <p className="text-sm font-thin">weight</p>{" "}
                 <span>{pokemonData?.weight}</span>
               </div>
-              <section>
-                <div>
-                  <h3>Type</h3>
-                  <div>{pokemonData?.types}</div>
+              </section>
 
+              <section className="flex gap-8">
+                <div className="grid place-content-center gap-4">
+                  <h3>Type</h3>
+                  <ul className="flex flex-wrap gap-2">
+                    {pokemonData?.types.map((type) => (
+                      <li key={type} className={`p-[5px] rounded-md capitalize ${bgStylePokemonType[type]}`}>{type}</li>
+                    ))}
+                  </ul>
                 </div>
                 <div>
                   <h3>Abilities</h3>
-
+                  <ul>
+                    {
+                      pokemonData?.abilities.map((ability) => <li className="capitalize" key={ability.ability.url}>{ability.ability.name}</li>)
+                    }
+                  </ul>
                 </div>
               </section>
             </div>
             <StatBarList stats={pokemonData?.stats} darkmode={darkmode} />
           </section>
-          <section>
-            
-          </section>
+          <section></section>
         </section>
       </article>
     </main>
