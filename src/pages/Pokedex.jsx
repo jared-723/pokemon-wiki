@@ -1,7 +1,20 @@
+import { useState } from "react";
 import { PokemonList } from "../components/pokedex/PokemonList";
 import { usePokedex } from "../hooks/usePokedex";
+import Pagination from "../components/pokedex/Pagination";
+import { paginateData } from "../utils/pagination";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/slices/trainer.slice";
 
 const Pokedex = ({ handleDarkmode, darkmode }) => {
+
+  const dispatch = useDispatch()
+  const [currentPage, setcurrentPage] = useState(1);
+
+  const handleLogOut = () =>{
+    dispatch(logout())
+  }
+
   const {
     name,
     pokemonName,
@@ -10,20 +23,29 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
     setPokemonType,
     handleChange,
     pokemonByName,
+    types,
   } = usePokedex();
+
+  const { itemsInCurrentPage, lastPage, pagesInCurrentBlock } = paginateData(pokemonByName,currentPage);
 
   return (
     <main className="grid gap-8">
       <section>
         <div className="h-[90px]">
-          <div className={`h-[70%] relative ${darkmode ? 'bg-[#ffc125]' : 'bg-[#DD1A1A]'} `}>
+          <div
+            className={`h-[70%] relative ${
+              darkmode ? "bg-[#ffc125]" : "bg-[#DD1A1A]"
+            } `}
+          >
             <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
               <img src="/images/banner.png" alt="" />
             </div>
-            <div
+            <div onClick={handleLogOut}
               className={`h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
-                after:border-[6px] after:border-black ${darkmode ? 'after:bg-[#3e3213]' : 'after:bg-[#212121] '} `}
+                after:border-[6px] after:border-black ${
+                  darkmode ? "after:bg-[#3e3213]" : "after:bg-[#212121] "
+                } transition-colors hover:bg-red-500 cursor-pointer`}
             ></div>
             <div
               onClick={handleDarkmode}
@@ -41,7 +63,13 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
             <p
               className={`py-[40px] ${darkmode ? "text-white" : "text-black"} `}
             >
-              <span className={`font-bold text-[#ff0000] ${darkmode ? 'text-[#ffc125]' : 'text-[#ff0000]'} `}>Welcome {name},</span>{" "}
+              <span
+                className={`font-bold text-[#ff0000] ${
+                  darkmode ? "text-[#ffc125]" : "text-[#ff0000]"
+                } `}
+              >
+                Welcome {name},
+              </span>{" "}
               Here you can find your favorite pokemon
             </p>
             <form className="flex flex-col sm:flex-row sm:justify-between gap-4">
@@ -57,40 +85,41 @@ const Pokedex = ({ handleDarkmode, darkmode }) => {
                   placeholder="Search pokemon..."
                   type="text"
                 />
-                <button className={`w-[120px] text-white py-[8px] font-bold ${ darkmode ? 'bg-[#ffc125]' : 'bg-[#D93F3F]'} `}>
+                <button
+                  className={`w-[120px] text-white py-[8px] font-bold ${
+                    darkmode ? "bg-[#ffc125]" : "bg-[#D93F3F]"
+                  } `}
+                >
                   Search
                 </button>
               </div>
               <select
                 value={pokemonType}
                 onChange={handleChange(setPokemonType)}
-                className={`shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px] ${darkmode ? 'text-white bg-[#272c34]' : 'text-black'} `}
+                className={`shadow-md w-[70%] sm:w-[180px] md:w-[200px] lg:w-[40%] px-3 py-[8px] capitalize ${
+                  darkmode ? "text-white bg-[#272c34]" : "text-black"
+                } `}
               >
                 <option value="">All pokemon</option>
-                <option value="grass">Grass</option>
-                <option value="fire">Fire</option>
-                <option value="water">Water</option>
-                <option value="rock">Rock</option>
-                <option value="normal">Normal</option>
-                <option value="poison">Poison</option>
-                <option value="electric">Electric</option>
-                <option value="ground">Ground</option>
-                <option value="fairy">Fairy</option>
 
-                <option value="dark">Dark</option>
-                <option value="dragon">Dragon</option>
-                <option value="fighting">Fighting</option>
-                <option value="flying">Flying</option>
-                <option value="ghost">Ghost</option>
-                <option value="ice">Ice</option>
-                <option value="psychic">Psychic</option>
-                <option value="steel">Steel</option>
+                {types.map((type) => (
+                  <option
+                    className="capitalize"
+                    key={type.name}
+                    value={type.name}
+                  >
+                    {type.name}
+                  </option>
+                ))}
               </select>
             </form>
           </div>
         </div>
       </section>
-      <PokemonList pokemons={pokemonByName} darkmode={darkmode} />
+
+      <Pagination lastPage = {lastPage} pagesInCurrentBlock= {pagesInCurrentBlock} setcurrentPage={setcurrentPage} currentPage={currentPage}/>
+
+      <PokemonList pokemons={itemsInCurrentPage} darkmode={darkmode}/>
     </main>
   );
 };

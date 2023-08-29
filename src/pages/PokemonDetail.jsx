@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { bgStylePokemonType, formatTypes, getPokemonById } from "../services/pokemons";
+import { bgStylePokemonType, getPokemonById } from "../services/pokemons";
 import StatBarList from "../components/pokemonDetail/StatBarList";
-
+import { useDispatch } from "react-redux";
+import { logout } from "../store/slices/trainer.slice";
 
 const PokemonDetail = ({ handleDarkmode, darkmode }) => {
+    const dispatch = useDispatch()
   const [pokemonData, setpokemonData] = useState(null);
-
+  const handleLogOut = () =>{
+    dispatch(logout())
+  }
   console.log(pokemonData);
 
   const { pokemonId } = useParams();
@@ -18,17 +22,17 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
   }, []);
 
   return (
-    <main className="min-h-screen grid grid-rows-[auto_1fr] gap-4 pb-[40px]">
+    <main className="min-h-screen grid grid-rows-[auto_1fr] gap-6 pb-[40px]">
       {/* Copied from Pokedex.jsx */}
       <div className="h-[90px]">
-        <div className={`h-[70%] relative ${darkmode ? 'bg-[#ffc125]' : 'bg-[#DD1A1A]'} `}>
+        <div className="h-[70%] bg-[#DD1A1A] relative">
           <div className="w-[220px] sm:w-[270px] absolute left-[5%] top-[30px] sm:top-[23px]">
             <img src="/images/banner.png" alt="" />
           </div>
-          <div
-            className={`h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square
+          <div onClick={handleLogOut}
+            className="h-[65px] aspect-square absolute right-[5%] top-[75%] bg-white rounded-full border-[7px] border-black after:block after:content-[''] after:h-9 after:aspect-square after:bg-[#212121] 
                 after:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-1/2 after:-translate-y-1/2 
-                after:border-[6px] after:border-black ${darkmode ? 'after:bg-[#3e3213]' : 'after:bg-[#212121] '} `}
+                after:border-[6px] after:border-black transition-colors hover:bg-red-500 cursor-pointer"
           ></div>
           <div
             onClick={handleDarkmode}
@@ -49,18 +53,27 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
           } `}
         >
           <header
-            className={`h-[100px] w-full relative ${
+            className={`h-[120px] w-full relative ${
               bgStylePokemonType[pokemonData?.types[0]]
-            } grid place-items-center`}
+            } flex justify-center items-center`}
           >
-            <div className="h-[90px] w-[90px] absolute -top-4 ">
+            <div className="absolute left-4 bottom-2 h-[50px]">
+              <img className="h-full w-full object-contain" src={pokemonData?.image_gif_front} alt="" />
+            </div>
+
+            <div className="h-[120px] w-[120px] absolute -top-4 ">
               <img
                 className="h-full w-full object-contain"
                 src={pokemonData?.image}
                 alt=""
               />
             </div>
+
+            <div className="absolute right-4 bottom-2 h-[50px]">
+              <img className="h-full w-full object-contain" src={pokemonData?.image_gif_back} alt="" />
+            </div>
           </header>
+          
           <section className="w-full px-4 text-center flex flex-col gap-4">
             <div>
               <span
@@ -107,6 +120,9 @@ const PokemonDetail = ({ handleDarkmode, darkmode }) => {
               </section>
             </div>
             <StatBarList stats={pokemonData?.stats} darkmode={darkmode} />
+          </section>
+          <section>
+            
           </section>
         </section>
       </article>
