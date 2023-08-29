@@ -1,13 +1,19 @@
 const Page404 = () => {
   return (
-    <main className="bg-[#e8ebf1] h-screen xl:flex-row sm:px-2 flex flex-col justify-center items-center">
-      <h1 className="text-center text-[60px] font-bold font-serif">
-        Error 404
-      </h1>
-      <p className="text-semibold text-[30px] text-center font-serif px-[5px]">
-        Oops! We're sorry, but the page you're trying to find doesn't exist.
+    <main className="flex flex-col">
+      <h1 className="text-[50px] bold text-center mx-5">404 Error</h1>
+      <p class="zoom-area font-semibold text-center mx-5">
+        Oops! The page you are trying to access does not exist...{" "}
       </p>
-      <div className="page404Bg"></div>
+      <section class="error-container">
+        <span>
+          <span>4</span>
+        </span>
+        <span>0</span>
+        <span>
+          <span>4</span>
+        </span>
+      </section>
     </main>
   );
 }
