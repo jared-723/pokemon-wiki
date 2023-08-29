@@ -142,9 +142,31 @@ const textColorPokemonType = {
   steel: "text-gray-500",
 };
 
+const bgColorTypeDetails = {
+  grass: "bg-green-500",
+  fire: "bg-orange-500",
+  water: "bg-blue-500",
+  bug: "bg-green-500",
+  normal: "bg-slate-400",
+  poison: "bg-purple-500",
+  electric: "bg-yellow-500",
+  ground: "bg-amber-950",
+  rock: "bg-stone-600",
+  fairy: "bg-pink-500",
+  dark: "bg-zinc-900",
+  dragon: "bg-indigo-700",
+  fighting: "bg-yellow-900",
+  flying: "bg-cyan-500",
+  ghost: "bg-violet-900",
+  ice: "bg-sky-300",
+  psychic: "bg-fuchsia-500",
+  steel: "bg-gray-500",
+};
+
 export {
   borderStylePokemonType,
   bgStylePokemonType,
   textColorPokemonType,
   formatTypes,
+  bgColorTypeDetails
 };
